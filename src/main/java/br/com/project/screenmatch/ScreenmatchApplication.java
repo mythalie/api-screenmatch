@@ -16,5 +16,6 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		var apiConsumption = new ApiConsumption();
 		var json = apiConsumption.getData("https://www.omdbapi.com/?t=game+of+thrones&Season=1&apikey=6585022c");
+		System.out.println(json);
 	}
 }
