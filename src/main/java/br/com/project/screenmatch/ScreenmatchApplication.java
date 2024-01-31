@@ -1,6 +1,7 @@
 package br.com.project.screenmatch;
 
-import br.com.project.screenmatch.model.SeriesData;
+import br.com.project.screenmatch.model.EpisodeData;
+import br.com.project.screenmatch.model.ShowData;
 import br.com.project.screenmatch.service.ApiConsumptionService;
 import br.com.project.screenmatch.service.ConvertDataService;
 import org.springframework.boot.CommandLineRunner;
@@ -17,10 +18,14 @@ public class ScreenmatchApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		var apiConsumption = new ApiConsumptionService();
-		var json = apiConsumption.getData("https://www.omdbapi.com/?t=game+of+thrones&apikey=6585022c");
-		System.out.println(json);
 		ConvertDataService convert = new ConvertDataService();
-		SeriesData data = convert.getData(json, SeriesData.class);
-		System.out.println(data);
+
+		var showJson = apiConsumption.getData("https://www.omdbapi.com/?t=game+of+thrones&apikey=6585022c");
+		ShowData showData = convert.getData(showJson, ShowData.class);
+		System.out.println(showData);
+
+		var episodeJson = apiConsumption.getData("https://www.omdbapi.com/?t=game+of+thrones&Season=1&episode=1&apikey=6585022c");
+		EpisodeData episodeData = convert.getData(episodeJson, EpisodeData.class);
+		System.out.println(episodeData);
 	}
 }
