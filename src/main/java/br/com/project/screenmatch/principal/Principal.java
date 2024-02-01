@@ -45,6 +45,8 @@ public class Principal {
                     }
                     seasons.forEach(System.out::println);
 
+                    seasons.forEach(t -> t.episodes().forEach(e -> System.out.println(e.title())));
+
                     // Se o nome da série foi encontrado e as condições foram satisfeitas, sai do loop
                     break;
                 } else {
