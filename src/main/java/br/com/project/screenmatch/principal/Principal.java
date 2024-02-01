@@ -11,7 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -89,10 +88,17 @@ public class Principal {
                 .collect(Collectors.toList());
 
         displayTopEpisodes(episodeData);
+
+        displayEvaluationBySeasons(seasons.stream()
+                .flatMap(t -> t.episodes().stream()
+                        .map(d -> new Episode(t.number(), d)))
+                .collect(Collectors.toList()));
+
         displayAllEpisodes(seasons.stream()
                 .flatMap(t -> t.episodes().stream()
                         .map(d -> new Episode(t.number(), d)))
                         .collect(Collectors.toList()));
+
         displayEpisodesByYear(seasons.stream()
                 .flatMap(t -> t.episodes().stream()
                         .map(d -> new Episode(t.number(), d)))
@@ -126,6 +132,27 @@ public class Principal {
                 .forEach(System.out::println);
     }
 
+    /*Método displayEvaluationBySeasons:
+        Exibe as temporadas conforme suas avaliações.*/
+    private void displayEvaluationBySeasons(List<Episode> episodes) {
+        System.out.println("\nAvaliação por temporada:");
+
+        /* Utiliza o método collect para agrupar os episódios por temporada (Episode::getSeason) em um LinkedHashMap para manter a ordem de inserção.
+           O método Collectors.averagingDouble(Episode::getRating) calcula a média das avaliações (Episode::getRating) para cada grupo (temporada).
+
+           Utiliza forEach para iterar sobre os resultados do agrupamento.
+           Para cada temporada (season) e média de avaliação (averageRating), imprime a informação formatada usando System.out.printf.
+           %.2f especifica que a média de avaliação (averageRating) deve ser formatada com dois dígitos após a vírgula.
+           %n é um especificador de formato para a nova linha, garantindo portabilidade entre diferentes sistemas operacionais.*/
+
+        episodes.stream()
+                .collect(Collectors.groupingBy(Episode::getSeason, LinkedHashMap::new,
+                        Collectors.averagingDouble(Episode::getRating)))
+                .forEach((season, averageRating) -> {
+                    System.out.printf("Season %d - Rating %.2f%n", season, averageRating);
+                });
+    }
+
     /*Método episodeYear:
         Busca os episódios a partir de uma data.*/
     private void displayEpisodesByYear (List<Episode> episodes) {
@@ -134,8 +161,6 @@ public class Principal {
         reading.nextLine();
 
         LocalDate search = LocalDate.of(year, 1, 1);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         episodes.stream()
                 .filter(e -> e.getReleaseDate() != null && e.getReleaseDate().isAfter(search))

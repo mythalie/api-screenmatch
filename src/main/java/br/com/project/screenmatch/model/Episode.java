@@ -31,6 +31,10 @@ public class Episode {
         return title;
     }
 
+    public Double getRating() {
+        return rating;
+    }
+
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
