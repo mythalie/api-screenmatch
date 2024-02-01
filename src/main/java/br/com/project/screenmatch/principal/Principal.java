@@ -96,6 +96,7 @@ public class Principal {
                 .filter(e -> !e.rating().equalsIgnoreCase("N/A"))
                 .sorted(Comparator.comparing(EpisodeData::rating).reversed())
                 .limit(5)
+                .map(EpisodeData::title)
                 .forEach(System.out::println);
 
         System.out.println();
