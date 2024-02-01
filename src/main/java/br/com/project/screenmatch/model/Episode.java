@@ -1,7 +1,6 @@
 package br.com.project.screenmatch.model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Episode {
@@ -23,35 +22,12 @@ public class Episode {
         this.releaseDate = parseReleaseDate(releaseDateValue);
     }
 
-    public Integer getSeason() {
-        return season;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public LocalDate getReleaseDate() {
-        return releaseDate;
-    }
-
     @Override
     public String toString() {
         return  "Temporada: " + season + " - Episódio: " + episodeNumber + ". " +
                 title + " - Avaliação: " + rating + " - Data lançamento: " + releaseDate ;
     }
 
-    public String getFormattedString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        return "Temporada: " + season + " - Episódio: " + episodeNumber + ". " +
-                title + " - Avaliação: " + rating + " - Data lançamento: " +
-                ((releaseDate != null) ? releaseDate.format(formatter) : "Data não disponível");
-    }
 
     private Double parseRating(String ratingValue) {
         try {
