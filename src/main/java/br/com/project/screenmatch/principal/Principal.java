@@ -10,6 +10,8 @@ import br.com.project.screenmatch.service.ConvertDataService;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -103,5 +105,26 @@ public class Principal {
                 ).collect(Collectors.toList());
 
         episodes.forEach(System.out::println);
+
+        System.out.println();
+        episodeYear(episodes);
+    }
+
+    /*Método episodeYear:
+        Busca os episódios a partir de uma data.*/
+    private void episodeYear (List<Episode> episodes) {
+        System.out.println("A partir de que ano você deseja ver os episódios?");
+        var year = reading.nextInt();
+        reading.nextLine();
+
+        LocalDate search = LocalDate.of(year, 1, 1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        episodes.stream()
+                .filter(e -> e.getReleaseDate() != null && e.getReleaseDate().isAfter(search))
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getSeason() + " Episódio: " + e.getTitle() + " Data lançamento: " + e.getReleaseDate().format(formatter)
+                ));
     }
 }
