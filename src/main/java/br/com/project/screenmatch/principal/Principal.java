@@ -1,5 +1,6 @@
 package br.com.project.screenmatch.principal;
 
+import br.com.project.screenmatch.model.EpisodeData;
 import br.com.project.screenmatch.model.SeasonData;
 import br.com.project.screenmatch.model.ShowData;
 import br.com.project.screenmatch.service.ApiConsumptionService;
@@ -9,8 +10,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Principal {
 
@@ -43,9 +46,20 @@ public class Principal {
                         SeasonData seasonData = convert.getData(seasonJson, SeasonData.class);
                         seasons.add(seasonData);
                     }
-                    seasons.forEach(System.out::println);
+                    //seasons.forEach(System.out::println);
 
                     seasons.forEach(t -> t.episodes().forEach(e -> System.out.println(e.title())));
+
+                    List<EpisodeData> episodeData = seasons.stream()
+                                    .flatMap(t -> t.episodes().stream())
+                                    .collect(Collectors.toList());
+
+                    System.out.println("\nTop 5 episódios");
+                    episodeData.stream()
+                            .filter(e -> !e.rating().equalsIgnoreCase("N/A"))
+                            .sorted(Comparator.comparing(EpisodeData::rating).reversed())
+                            .limit(5)
+                            .forEach(System.out::println);
 
                     // Se o nome da série foi encontrado e as condições foram satisfeitas, sai do loop
                     break;
