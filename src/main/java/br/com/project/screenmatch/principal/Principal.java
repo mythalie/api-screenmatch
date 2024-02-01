@@ -167,6 +167,8 @@ public class Principal {
                     System.out.println("Temporada: " + episode.getSeason());
                 });
             });
+        } else {
+            System.out.println("Episódio não encontrado!");
         }
     }
 }
