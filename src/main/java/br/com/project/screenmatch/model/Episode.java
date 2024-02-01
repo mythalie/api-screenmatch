@@ -1,6 +1,7 @@
 package br.com.project.screenmatch.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Episode {
@@ -15,65 +16,52 @@ public class Episode {
         this.title = episodeData.title();
         this.episodeNumber = episodeData.number();
 
-        try {
-            this.rating = Double.valueOf(episodeData.rating());
-        } catch (NumberFormatException ex) {
-            this.rating = 0.0;
-        }
+        String ratingValue = episodeData.rating();
+        this.rating = parseRating(ratingValue);
 
-        try {
-            this.releaseDate = LocalDate.parse(episodeData.releaseDate());
-        } catch (DateTimeParseException ex) {
-            this.releaseDate = null;
-        }
+        String releaseDateValue = episodeData.releaseDate();
+        this.releaseDate = parseReleaseDate(releaseDateValue);
     }
 
     public Integer getSeason() {
         return season;
     }
 
-    public void setSeason(Integer season) {
-        this.season = season;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getEpisodeNumber() {
-        return episodeNumber;
-    }
-
-    public void setEpisodeNumber(Integer episodeNumber) {
-        this.episodeNumber = episodeNumber;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
     }
 
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(LocalDate releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
     @Override
     public String toString() {
-        return  "season=" + season +
-                ", title='" + title + '\'' +
-                ", episodeNumber=" + episodeNumber +
-                ", rating=" + rating +
-                ", releaseDate=" + releaseDate ;
+        return  "Temporada: " + season + " - Episódio: " + episodeNumber + ". " +
+                title + " - Avaliação: " + rating + " - Data lançamento: " + releaseDate ;
+    }
+
+    public String getFormattedString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        return "Temporada: " + season + " - Episódio: " + episodeNumber + ". " +
+                title + " - Avaliação: " + rating + " - Data lançamento: " +
+                ((releaseDate != null) ? releaseDate.format(formatter) : "Data não disponível");
+    }
+
+    private Double parseRating(String ratingValue) {
+        try {
+            return Double.valueOf(ratingValue);
+        } catch (NumberFormatException ex) {
+            return 0.0;
+        }
+    }
+
+    private LocalDate parseReleaseDate(String releaseDateValue) {
+        try {
+            return LocalDate.parse(releaseDateValue);
+        } catch (DateTimeParseException ex) {
+            return null;
+        }
     }
 }
