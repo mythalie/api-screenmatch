@@ -1,11 +1,13 @@
 package br.com.project.screenmatch.principal;
 
 import br.com.project.screenmatch.model.SeasonData;
+import br.com.project.screenmatch.model.Serie;
 import br.com.project.screenmatch.model.ShowData;
 import br.com.project.screenmatch.service.ApiConsumptionService;
 import br.com.project.screenmatch.service.ConvertDataService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Principal {
 
@@ -78,6 +80,12 @@ public class Principal {
     }
 
     private void getSearchedSeries() {
-        showData.forEach(System.out::println);
+        List<Serie> series = new ArrayList<>();
+        series = showData.stream()
+                .map(d -> new Serie(d))
+                .collect(Collectors.toList());
+        series.stream()
+                .sorted(Comparator.comparing(Serie::getGenre))
+                .forEach(System.out::println);
     }
 }
