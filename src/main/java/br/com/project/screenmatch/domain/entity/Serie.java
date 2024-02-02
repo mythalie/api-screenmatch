@@ -30,6 +30,8 @@ public class Serie {
 
     private String plot;
 
+    public Serie() {}
+
     public Serie(ShowData showData) {
         this.title = showData.title();
         this.totalSeasons = showData.totalSeasons();
