@@ -1,4 +1,4 @@
-package br.com.project.screenmatch.service;
+package br.com.project.screenmatch.configuration;
 
 import java.io.IOException;
 import java.net.URI;
@@ -6,7 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ApiConsumptionService {
+public class ApiConsumption {
     public String getData(String endereco) {
         //O HttpClient é a classe principal para realizar operações HTTP.
         HttpClient client = HttpClient.newHttpClient();

@@ -1,9 +1,9 @@
 package br.com.project.screenmatch.principal;
 
 import br.com.project.screenmatch.model.SeasonData;
-import br.com.project.screenmatch.model.Serie;
+import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.model.ShowData;
-import br.com.project.screenmatch.service.ApiConsumptionService;
+import br.com.project.screenmatch.configuration.ApiConsumption;
 import br.com.project.screenmatch.service.ConvertDataService;
 
 import java.util.*;
@@ -15,7 +15,7 @@ public class Principal {
     private static final String API_KEY = "&apikey=6585022c";
 
     private Scanner reading = new Scanner(System.in);
-    private ApiConsumptionService apiConsumption = new ApiConsumptionService();
+    private ApiConsumption apiConsumption = new ApiConsumption();
     private ConvertDataService convert = new ConvertDataService();
     private List<ShowData> showData = new ArrayList<>();
 
