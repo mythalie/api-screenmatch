@@ -4,6 +4,7 @@ import br.com.project.screenmatch.model.SeasonData;
 import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.model.ShowData;
 import br.com.project.screenmatch.configuration.ApiConsumption;
+import br.com.project.screenmatch.repository.SerieRepository;
 import br.com.project.screenmatch.service.ConvertDataService;
 
 import java.util.*;
@@ -18,6 +19,11 @@ public class Principal {
     private ApiConsumption apiConsumption = new ApiConsumption();
     private ConvertDataService convert = new ConvertDataService();
     private List<ShowData> showData = new ArrayList<>();
+    private SerieRepository repository;
+
+    public Principal(SerieRepository repository) {
+        this.repository = repository;
+    }
 
     public void displayMenu() {
         var option = -1;
@@ -56,7 +62,8 @@ public class Principal {
 
     private void getSerie() {
         ShowData data = getShowData();
-        showData.add(data);
+        Serie serie = new Serie(data);
+        repository.save(serie);
         System.out.println(data);
     }
 
