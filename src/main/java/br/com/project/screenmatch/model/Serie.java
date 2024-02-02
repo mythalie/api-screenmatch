@@ -1,5 +1,7 @@
 package br.com.project.screenmatch.model;
 
+import br.com.project.screenmatch.service.QueryChatGPT;
+
 import java.util.OptionalDouble;
 
 public class Serie {
@@ -18,7 +20,7 @@ public class Serie {
         this.genre = Category.fromString(showData.genre().split(",")[0].trim());
         this.actors = showData.actors();
         this.poster = showData.poster();
-        this.plot = showData.plot();
+        this.plot = QueryChatGPT.getTranslation(showData.plot().trim());
     }
 
     public String getTitle() {
@@ -85,6 +87,6 @@ public class Serie {
                 ", genre=" + genre +
                 ", actors='" + actors + '\'' +
                 ", poster='" + poster + '\'' +
-                ", plot='" + plot + '\'' ;
+                ", plot='" + plot ;
     }
 }
