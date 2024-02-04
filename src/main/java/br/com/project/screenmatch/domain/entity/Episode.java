@@ -1,6 +1,5 @@
 package br.com.project.screenmatch.domain.entity;
 
-import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.model.EpisodeData;
 import jakarta.persistence.*;
 
@@ -22,6 +21,8 @@ public class Episode {
     @ManyToOne
     private Serie serie;
 
+    public Episode(){}
+
     public Episode(Integer seasonNumber, EpisodeData episodeData) {
         this.season = seasonNumber;
         this.title = episodeData.title();
@@ -40,6 +41,9 @@ public class Episode {
                 title + " - Avaliação: " + rating + " - Data lançamento: " + releaseDate ;
     }
 
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
 
     private Double parseRating(String ratingValue) {
         try {

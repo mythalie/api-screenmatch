@@ -32,7 +32,7 @@ public class Serie {
 
     private String plot;
 
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Episode> episodes = new ArrayList<>();
 
     public Serie() {}
@@ -47,78 +47,27 @@ public class Serie {
         this.plot = QueryChatGPT.getTranslation(showData.plot().trim());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Integer getTotalSeasons() {
         return totalSeasons;
     }
 
-    public void setTotalSeasons(Integer totalSeasons) {
-        this.totalSeasons = totalSeasons;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
     public Category getGenre() {
         return genre;
     }
 
-    public void setGenre(Category genre) {
-        this.genre = genre;
-    }
-
-    public String getActors() {
-        return actors;
-    }
-
-    public void setActors(String actors) {
-        this.actors = actors;
-    }
-
-    public String getPoster() {
-        return poster;
-    }
-
-    public void setPoster(String poster) {
-        this.poster = poster;
-    }
-
-    public String getPlot() {
-        return plot;
-    }
-
-    public void setPlot(String plot) {
-        this.plot = plot;
+    public void setEpisodes(List<Episode> episodes) {
+        episodes.forEach(e -> e.setSerie(this));
+        this.episodes = episodes;
     }
 
     @Override
     public String toString() {
-        return  "title='" + title + '\'' +
-                ", totalSeasons=" + totalSeasons +
-                ", rating=" + rating +
-                ", genre=" + genre +
-                ", actors='" + actors + '\'' +
-                ", poster='" + poster + '\'' +
-                ", plot='" + plot ;
+        return  "Título: " + title + " - Total de temporadas: " + totalSeasons + " - Avaliação: " +
+                rating + " - Gênero: " + genre + " - Atores: " + actors + " - Poster: " + poster + " - Trama: " + plot +
+                " - Episódios: " + episodes;
     }
 }
