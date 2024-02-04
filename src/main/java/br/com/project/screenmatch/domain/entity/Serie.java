@@ -64,6 +64,10 @@ public class Serie {
         this.episodes = episodes;
     }
 
+    public Double getRating() {
+        return rating;
+    }
+
     @Override
     public String toString() {
         return  "Título: " + title + " - Total de temporadas: " + totalSeasons + " - Avaliação: " +

@@ -34,6 +34,7 @@ public class Principal {
                     1 - Buscar séries
                     2 - Buscar episódios
                     3 - Listar séries buscadas
+                    4 - Top 5 séries
                                     
                     0 - Sair                                 
                     """;
@@ -51,6 +52,9 @@ public class Principal {
                     break;
                 case 3:
                     getSearchedSeries();
+                    break;
+                case 4:
+                    getTop5Series();
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -112,5 +116,11 @@ public class Principal {
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenre))
                 .forEach(System.out::println);
+    }
+
+    private void getTop5Series() {
+        List<Serie> serie = repository.findTop5ByOrderByRatingDesc();
+        serie.forEach(s ->
+                System.out.println(s.getTitle() + " avaliação: " + s.getRating()));
     }
 }
