@@ -1,14 +1,26 @@
-package br.com.project.screenmatch.model;
+package br.com.project.screenmatch.domain.entity;
+
+import br.com.project.screenmatch.domain.entity.Serie;
+import br.com.project.screenmatch.model.EpisodeData;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+@Entity
+@Table(name = "episodes")
 public class Episode {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Integer season;
     private String title;
     private Integer episodeNumber;
     private Double rating;
     private LocalDate releaseDate;
+
+    @ManyToOne
+    private Serie serie;
 
     public Episode(Integer seasonNumber, EpisodeData episodeData) {
         this.season = seasonNumber;

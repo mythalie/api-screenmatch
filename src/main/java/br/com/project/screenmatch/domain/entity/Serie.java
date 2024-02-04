@@ -5,6 +5,8 @@ import br.com.project.screenmatch.model.Category;
 import br.com.project.screenmatch.model.ShowData;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalDouble;
 
 @Entity
@@ -29,6 +31,9 @@ public class Serie {
     private String poster;
 
     private String plot;
+
+    @OneToMany(mappedBy = "serie")
+    private List<Episode> episodes = new ArrayList<>();
 
     public Serie() {}
 
