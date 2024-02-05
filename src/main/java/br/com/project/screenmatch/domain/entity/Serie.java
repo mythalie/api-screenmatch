@@ -64,6 +64,22 @@ public class Serie {
         this.episodes = episodes;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
     public Double getRating() {
         return rating;
     }
