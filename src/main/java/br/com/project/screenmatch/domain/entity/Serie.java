@@ -1,6 +1,6 @@
 package br.com.project.screenmatch.domain.entity;
 
-import br.com.project.screenmatch.configuration.QueryChatGPT;
+import br.com.project.screenmatch.service.QueryChatGPT;
 import br.com.project.screenmatch.model.Category;
 import br.com.project.screenmatch.model.ShowData;
 import jakarta.persistence.*;

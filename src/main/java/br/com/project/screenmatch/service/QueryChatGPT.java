@@ -1,4 +1,4 @@
-package br.com.project.screenmatch.configuration;
+package br.com.project.screenmatch.service;
 
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.service.OpenAiService;

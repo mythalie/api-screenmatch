@@ -1,6 +1,6 @@
 package br.com.project.screenmatch.principal;
 
-import br.com.project.screenmatch.configuration.ApiConsumption;
+import br.com.project.screenmatch.service.ApiConsumption;
 import br.com.project.screenmatch.domain.entity.Episode;
 import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.model.SeasonData;
