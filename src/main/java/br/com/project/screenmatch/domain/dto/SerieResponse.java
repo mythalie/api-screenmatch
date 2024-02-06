@@ -1,6 +1,5 @@
 package br.com.project.screenmatch.domain.dto;
 
-import br.com.project.screenmatch.domain.entity.FavoriteSeries;
 import br.com.project.screenmatch.model.Category;
 
 public record SerieResponse(Long id,
