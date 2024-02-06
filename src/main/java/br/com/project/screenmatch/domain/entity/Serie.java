@@ -4,6 +4,7 @@ import br.com.project.screenmatch.service.QueryChatGPT;
 import br.com.project.screenmatch.model.Category;
 import br.com.project.screenmatch.model.ShowData;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,10 @@ public class Serie {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Integer getTotalSeasons() {

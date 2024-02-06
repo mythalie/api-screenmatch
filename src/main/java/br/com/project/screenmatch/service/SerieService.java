@@ -1,6 +1,6 @@
 package br.com.project.screenmatch.service;
 
-import br.com.project.screenmatch.domain.dto.SerieDTO;
+import br.com.project.screenmatch.domain.dto.SerieResponse;
 import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +16,26 @@ public class SerieService {
     @Autowired
     private SerieRepository repository;
 
-    public List<SerieDTO> getAllSeries() {
-        return convertsData(repository.findAll());
+    public List<SerieResponse> getAllSeries() {
+        return convertData(repository.findAll());
     }
 
-    public List<SerieDTO> getTop5Series() {
-        return convertsData(repository.findTop5ByOrderByRatingDesc());
+    public List<SerieResponse> getTop5Series() {
+        return convertData(repository.findTop5ByOrderByRatingDesc());
     }
 
-    private List<SerieDTO> convertsData(List<Serie> series) {
+    public Optional<SerieResponse> getSerieById(Long id) {
+        return repository.findById(id)
+                .map(s -> new SerieResponse(s.getId(), s.getTitle(), s.getTotalSeasons(), s.getRating(), s.getGenre(), s.getActors(), s.getPoster(), s.getPlot()));
+    }
+
+    private List<SerieResponse> convertData(List<Serie> series) {
         return series.stream()
-                .map(s -> new SerieDTO(s.getId(), s.getTitle(), s.getTotalSeasons(), s.getRating(), s.getGenre(), s.getActors(), s.getPoster(), s.getPlot()))
+                .map(this::convertToSerieResponse)
                 .collect(Collectors.toList());
     }
 
-    public SerieDTO getId(Long id) {
-        Optional<Serie> serie = repository.findById(id);
-
-        if (serie.isPresent()) {
-            Serie s = serie.get();
-            return new SerieDTO(s.getId(), s.getTitle(), s.getTotalSeasons(), s.getRating(), s.getGenre(), s.getActors(), s.getPoster(), s.getPlot());
-        }
-        return null;
+    private SerieResponse convertToSerieResponse(Serie serie) {
+        return new SerieResponse(serie.getId(), serie.getTitle(), serie.getTotalSeasons(), serie.getRating(), serie.getGenre(), serie.getActors(), serie.getPoster(), serie.getPlot());
     }
 }

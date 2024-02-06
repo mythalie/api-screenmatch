@@ -2,6 +2,7 @@ package br.com.project.screenmatch.domain.entity;
 
 import br.com.project.screenmatch.model.EpisodeData;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

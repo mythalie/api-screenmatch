@@ -78,6 +78,16 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!--  O Lombok fornece anotações que geram automaticamente métodos como getters, setters, construtores, etc., durante a compilação,
+		economizando assim a necessidade de escrever esses métodos manualmente.
+		A tag <optional>true</optional> indica que a dependência é opcional, o que significa que o projeto ainda pode ser compilado e executado mesmo se o
+		Lombok não estiver presente. -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- Integração do Spring Boot com o Swagger para documentação de API usando o OpenAPI -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
