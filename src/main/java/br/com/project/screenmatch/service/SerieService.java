@@ -4,6 +4,10 @@ import br.com.project.screenmatch.domain.dto.SerieResponse;
 import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +20,9 @@ public class SerieService {
     @Autowired
     private SerieRepository repository;
 
-    public List<SerieResponse> getAllSeries() {
-        return convertData(repository.findAll());
+    public Page<SerieResponse> getAllSeries(Pageable pageable) {
+        pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("title"));
+        return repository.findAll(pageable).map(this::convertToSerieResponse);
     }
 
     public List<SerieResponse> getTop5Series() {

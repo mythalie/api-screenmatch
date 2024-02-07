@@ -3,6 +3,8 @@ package br.com.project.screenmatch.controller;
 import br.com.project.screenmatch.domain.dto.SerieResponse;
 import br.com.project.screenmatch.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +23,8 @@ public class SerieController {
     }
 
     @GetMapping
-    public List<SerieResponse> getSeries() {
-    return service.getAllSeries();
+    public Page<SerieResponse> getSeries(Pageable pageable) {
+    return service.getAllSeries(pageable);
     }
 
     @GetMapping("/top5")
