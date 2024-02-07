@@ -16,4 +16,32 @@ public class ShareSerie {
     private String recipientEmail;
     private String message;
     private LocalDateTime dateSharing = LocalDateTime.now();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
+
+    public String getRecipientEmail() {
+        return recipientEmail;
+    }
+
+    public void setRecipientEmail(String recipientEmail) {
+        this.recipientEmail = recipientEmail;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
 }

@@ -1,0 +1,12 @@
+package br.com.project.screenmatch.domain.dto;
+
+import jakarta.validation.constraints.NotEmpty;
+
+public class FavoriteSeriesUpdateRequest {
+    @NotEmpty(message = "Título deve ser definido")
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+}
