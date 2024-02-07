@@ -1,11 +1,16 @@
 package br.com.project.screenmatch.domain.dto;
 
-import br.com.project.screenmatch.domain.entity.Serie;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
 public class ShareSerieCreateRequest {
+    @NotNull
     private Long serieId;
+    @NotBlank
+    @Email
     private String recipientEmail;
     private String message;
 
