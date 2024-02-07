@@ -29,4 +29,20 @@ public class ShareSerieResponse {
     public String getMessage() {
         return message;
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
+
+    public void setRecipientEmail(String recipientEmail) {
+        this.recipientEmail = recipientEmail;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

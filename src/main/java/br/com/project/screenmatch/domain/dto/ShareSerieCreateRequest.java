@@ -25,4 +25,16 @@ public class ShareSerieCreateRequest {
     public Long getSerieId() {
         return serieId;
     }
+
+    public void setSerieId(Long serieId) {
+        this.serieId = serieId;
+    }
+
+    public void setRecipientEmail(String recipientEmail) {
+        this.recipientEmail = recipientEmail;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
