@@ -17,8 +17,9 @@ public class ShareSerieController {
     ShareSerieService service;
 
     @GetMapping
-    public List<ShareSerieResponse> getShareSerie() {
-        return service.getAllShareSerie();
+    public ResponseEntity<List<ShareSerieResponse>> getShareSerie() {
+        List<ShareSerieResponse> allShareSerie = service.getAllShareSerie();
+        return ResponseEntity.ok(allShareSerie);
     }
 
     @PostMapping("/share")

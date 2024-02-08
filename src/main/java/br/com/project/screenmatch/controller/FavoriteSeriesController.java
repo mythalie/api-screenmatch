@@ -19,8 +19,9 @@ public class FavoriteSeriesController {
     private FavoriteSeriesService service;
 
     @GetMapping
-    public List<FavoriteSeriesResponse> getFavoriteSeries() {
-        return service.getAllFavoriteSeries();
+    public ResponseEntity<List<FavoriteSeriesResponse>> getFavoriteSeries() {
+        List<FavoriteSeriesResponse> allSeries = service.getAllFavoriteSeries();
+        return ResponseEntity.ok(allSeries);
     }
 
     @PostMapping
