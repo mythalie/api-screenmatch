@@ -6,6 +6,11 @@ public class FavoriteSeriesResponse {
     private Long id;
     private String title;
 
+    public FavoriteSeriesResponse(Long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
     public FavoriteSeriesResponse(FavoriteSeries favoriteSeries) {
         this.id = favoriteSeries.getId();
         this.title = favoriteSeries.getTitle();

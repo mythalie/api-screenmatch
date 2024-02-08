@@ -1,7 +1,6 @@
 package br.com.project.screenmatch.domain.dto;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
 
 public class FavoriteSeriesCreateRequest {
     @NotEmpty(message = "Título deve ser definido")
@@ -9,5 +8,9 @@ public class FavoriteSeriesCreateRequest {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
