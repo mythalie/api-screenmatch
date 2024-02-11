@@ -2,6 +2,7 @@ package br.com.project.screenmatch.controller;
 
 import br.com.project.screenmatch.domain.dto.*;
 import br.com.project.screenmatch.service.FavoriteSeriesService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/favoriteSeries")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "bearer-key")
 public class FavoriteSeriesController {
 
     @Autowired

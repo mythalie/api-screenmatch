@@ -3,6 +3,7 @@ package br.com.project.screenmatch.controller;
 import br.com.project.screenmatch.domain.dto.SerieResponse;
 import br.com.project.screenmatch.domain.entity.Serie;
 import br.com.project.screenmatch.service.SerieService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/series")
+@SecurityRequirement(name = "bearer-key")
 public class SerieController {
 
     @Autowired
