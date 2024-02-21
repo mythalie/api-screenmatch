@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity // Indica que esta classe está habilitando a segurança web fornecida pelo Spring Security na aplicação.
 public class SecurityConfig {
 
     @Autowired
@@ -26,6 +26,12 @@ public class SecurityConfig {
     em outras classes.*/
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        /*
+        Define um bean chamado securityFilterChain, que configura a cadeia de filtros de segurança.
+        Essa cadeia define políticas de segurança para diferentes endpoints da aplicação, como permitir acesso público a alguns endpoints,
+        exigir autenticação para outros e assim por diante.
+        O método addFilterBefore adiciona o securityFilter antes do filtro padrão de autenticação por nome de usuário e senha do Spring Security.
+         */
         return http.csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
@@ -39,11 +45,13 @@ public class SecurityConfig {
     }
 
     @Bean
+    //  Este bean é necessário para processar as solicitações de autenticação.
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
+    // Este bean é responsável por criptografar as senhas antes de serem armazenadas ou comparadas com as senhas fornecidas durante o processo de autenticação.
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }

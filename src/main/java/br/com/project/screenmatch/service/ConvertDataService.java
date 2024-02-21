@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ConvertDataService implements IConvertDataService {
+    /*
+    Essa classe é útil quando você precisa converter dados JSON em objetos Java de forma genérica.
+     */
     private ObjectMapper mapper = new ObjectMapper();
 
     @Override

@@ -10,6 +10,10 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class SpringDocConfig {
 
+    /*
+    Esta classe configura uma instância personalizada de OpenAPI, que será utilizada pelo Springdoc OpenAPI para gerar a documentação da API.
+    Além disso, ela define um esquema de segurança básico para a API, especificando que ela utiliza autenticação do tipo "bearer" com tokens JWT.
+     */
     @Primary
     @Bean
     public OpenAPI customOpenAPI() {

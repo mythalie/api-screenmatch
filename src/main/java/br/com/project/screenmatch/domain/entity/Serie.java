@@ -4,12 +4,16 @@ import br.com.project.screenmatch.service.QueryChatGPT;
 import br.com.project.screenmatch.model.Category;
 import br.com.project.screenmatch.model.ShowData;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "series")
 public class Serie {
     @Id
@@ -47,45 +51,9 @@ public class Serie {
         this.plot = QueryChatGPT.getTranslation(showData.plot().trim());
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getTotalSeasons() {
-        return totalSeasons;
-    }
-
-    public Category getGenre() {
-        return genre;
-    }
-
     public void setEpisodes(List<Episode> episodes) {
         episodes.forEach(e -> e.setSerie(this));
         this.episodes = episodes;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getActors() {
-        return actors;
-    }
-
-    public String getPoster() {
-        return poster;
-    }
-
-    public String getPlot() {
-        return plot;
-    }
-
-    public Double getRating() {
-        return rating;
     }
 
     @Override

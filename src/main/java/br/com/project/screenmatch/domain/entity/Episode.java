@@ -3,11 +3,15 @@ package br.com.project.screenmatch.domain.entity;
 import br.com.project.screenmatch.model.EpisodeData;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "episodes")
 public class Episode {
     @Id
@@ -40,10 +44,6 @@ public class Episode {
     public String toString() {
         return  "Temporada: " + season + " - Episódio: " + episodeNumber + ". " +
                 title + " - Avaliação: " + rating + " - Data lançamento: " + releaseDate ;
-    }
-
-    public void setSerie(Serie serie) {
-        this.serie = serie;
     }
 
     private Double parseRating(String ratingValue) {

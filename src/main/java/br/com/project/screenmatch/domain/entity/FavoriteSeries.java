@@ -1,8 +1,12 @@
 package br.com.project.screenmatch.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "favorite_series")
 public class FavoriteSeries {
     @Id

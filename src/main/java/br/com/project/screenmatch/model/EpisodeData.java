@@ -3,7 +3,7 @@ package br.com.project.screenmatch.model;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown = true) // Ignorar quaisquer propriedades desconhecidas que possam estar presentes nos dados JSON
 public record EpisodeData(@JsonAlias("Title") String title,
                           @JsonAlias("Episode") Integer number,
                           @JsonAlias("imdbRating") String rating,
