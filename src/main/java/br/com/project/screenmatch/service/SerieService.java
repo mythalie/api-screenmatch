@@ -2,6 +2,7 @@ package br.com.project.screenmatch.service;
 
 import br.com.project.screenmatch.domain.dto.SerieResponse;
 import br.com.project.screenmatch.domain.entity.Serie;
+import br.com.project.screenmatch.model.ShowData;
 import br.com.project.screenmatch.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,8 +18,35 @@ import java.util.stream.Collectors;
 @Service
 public class SerieService {
 
+    private static final String ADDRESS = "https://www.omdbapi.com/?t=";
+    private static final String API_KEY = "&apikey=6585022c";
+
+    @Autowired
+    private ApiConsumption apiConsumption;
+
+    @Autowired
+    private ConvertDataService convert;
+
     @Autowired
     private SerieRepository repository;
+
+    public SerieResponse searchAndSaveSerie(String seriesName) {
+        Optional<Serie> existingSerie = repository.findByTitle(seriesName);
+        if (existingSerie.isPresent()) {
+            Serie existing = existingSerie.get();
+            return convertToSerieResponse(existing);
+        }
+
+        ShowData showData = getShowData(seriesName);
+        Serie serie = new Serie(showData);
+        Serie savedSerie = repository.save(serie);
+        return convertToSerieResponse(savedSerie);
+    }
+
+    private ShowData getShowData(String seriesName) {
+        String json = apiConsumption.getData(ADDRESS + seriesName.replace(" ", "+") + API_KEY);
+        return convert.getData(json, ShowData.class);
+    }
 
     public Page<SerieResponse> getAllSeries(Pageable pageable) {
         pageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("title"));

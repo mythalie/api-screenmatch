@@ -33,6 +33,12 @@ public class SerieController {
         return ResponseEntity.ok(series);
     }
 
+    @PostMapping("/search")
+    public ResponseEntity<SerieResponse> searchAndSaveSerie(@RequestParam String seriesName) {
+        SerieResponse savedSerie = service.searchAndSaveSerie(seriesName);
+        return ResponseEntity.ok(savedSerie);
+    }
+
     @GetMapping("/top5")
     public ResponseEntity<List<SerieResponse>> getTop5Series() {
         List<SerieResponse> top5Series = service.getTop5Series();
